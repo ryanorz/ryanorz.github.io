@@ -6,10 +6,10 @@ date:       2016-05-23
 author:     "Ryan"
 header-img: "img/post-bg-2015.jpg"
 tags:
-    - C
+    - C/C++
     - linux
     - Programming
---- 
+---
 
 # Description
 
