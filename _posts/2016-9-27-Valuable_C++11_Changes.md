@@ -77,7 +77,7 @@ auto pObject = new SomeType::VeryVeryLongType();
 # 3. range `for` loop
 
 为了在遍历容器时支持”foreach”用法，C++11扩展了for语句的语法。
-用这个新的写法，可以遍历C类型的数组、初始化列表以及任何重载了非成员的`begin()`和end`()`函数的类型。
+用这个新的写法，可以遍历C类型的数组、初始化列表以及任何重载了非成员的`begin()`和`end()`函数的类型。
 
 ```cpp
 std::map<std::string, std::vector<int>> map;
@@ -155,9 +155,9 @@ public:
 };
 ```
 
-# 6.  Lvalues, Rvalues, and References
+# 6. `Lvalues, Rvalues and References`
 
-## Lvalues and Rvalues
+## 6.1 `Lvalues and Rvalues`
 
 * An `lvalue` is an expression that identifies a non-temporary object.
 * An `rvalue` is an expression that identifies a temporary object or is a value (such as a literal constant) not associated with any object.
@@ -199,9 +199,9 @@ string && bad2 = str + "";          // Legal
 string && sub = str.substr( 0, 4 ); // Legal
 ```
 
-## `lvalue references use`
+## 6.2 `lvalue references use`
 
-### 1: aliasing complicated names
+### 6.2.1 `aliasing complicated names`
 
 ```cpp
 auto & whichList = theLists[ myhash( x, theLists.size( ) ) ];
@@ -210,16 +210,17 @@ if( find(begin(whichList), end(whichList), x) != end(whichList) )
 whichList.push_back( x );
 ```
 
-### 2: range for loops
+### 6.2.2 `range for loops`
 
 ```cpp
 for( auto & x : arr )
 	++x;
 ```
 
-### 3: avoiding a copy
+### 6.2.3 `avoiding a copy`
 
 如果没必要再拷贝一遍返回值(尤其是返回值非常大的情况下，拷贝一遍是非常浪费时间的), 可以直接引用避免拷贝．
+
 ```cpp
 LargeType randomItem1( const vector<LargeType> & arr )
 {
@@ -236,7 +237,7 @@ LargeType item2 = randomItem2( vec );          // copy
 const LargeType & item3 = randomItem2( vec );  // no copy
 ```
 
-## move语义
+## 6.3 `move`语义
 
 转移语义可以将资源 ( 堆，系统对象等 ) 从一个对象转移到另一个对象，这样能够减少不必要的临时对象的创建、拷贝以及销毁，能够大幅度提高 C++ 应用程序的性能。
 
@@ -258,6 +259,8 @@ vector<int> vec;
 ...
 vector<int> sums = partialSum( vec ); // Copy in old C++; move in C++11
 ```
+
+## 6.4 `std::move`的使用
 
 ```cpp
 void BadSwap( vector<string> & x, vector<string> & y )
@@ -282,8 +285,10 @@ void BestSwap( vector<string> & x, vector<string> & y )
 	y = std::move( tmp );
 }
 ```
+## 6.5 `Perfect Forwarding`问题
 
 右值引用是右值吗? C++11 中定义的 T&& 的推导规则为： 右值实参为右值引用，左值实参仍然为左值引用。
+
 根据这个推导规则，右值引用能解决`Perfect Forwarding`问题．
 `Perfect Forwarding`: 精确传递, 完美转发, 精准转发
 精确传递适用于这样的场景：需要将一组参数原封不动的传递给另一个函数。
