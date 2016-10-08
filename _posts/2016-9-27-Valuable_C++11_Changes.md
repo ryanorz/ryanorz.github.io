@@ -46,7 +46,9 @@ private:
 	int a = 7; // c++11 only
 };
 ```
-# 2. 自动类型推导`auto`
+# 2. 自动类型推导`auto`与`decltype`
+
+## 2.1 `auto`
 
 ```cpp
 auto x = 0;   // x is int
@@ -72,6 +74,39 @@ auto obj = ProcessData(vars);
 
 ```cpp
 auto pObject = new SomeType::VeryVeryLongType();
+```
+
+## 2.2 新的返回值语法
+
+```cpp
+int func(int x);
+```
+
+在`C++11`中，如果你愿意，你可以将返回值放在函数声明的最后，将`auto`放在返回值的位置:
+
+```cpp
+auto func(int x) -> int;
+```
+
+这么做法主要和`decltype`搭配起来使用，一般应用在泛型编程中．
+
+## 2.3 `decltype`
+
+`decltype`关键字用于查询表达式的类型。只是`查询`,不`求值`.
+所有下面这段代码是不能编译通过的．
+
+```cpp
+cout << decltype(n);
+```
+
+正确的使用方式是这样：
+
+```cpp
+template<typename _Container>
+auto begin(_Container& __cont) -> decltype(__cont.begin())
+{
+	return __cont.begin();
+}
 ```
 
 # 3. range `for` loop
@@ -285,6 +320,7 @@ void BestSwap( vector<string> & x, vector<string> & y )
 	y = std::move( tmp );
 }
 ```
+
 ## 6.5 `Perfect Forwarding`问题
 
 右值引用是右值吗? C++11 中定义的 T&& 的推导规则为： 右值实参为右值引用，左值实参仍然为左值引用。
