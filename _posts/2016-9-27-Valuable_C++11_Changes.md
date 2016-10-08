@@ -46,6 +46,7 @@ private:
 	int a = 7; // c++11 only
 };
 ```
+
 # 2. 自动类型推导`auto`与`decltype`
 
 ## 2.1 `auto`
