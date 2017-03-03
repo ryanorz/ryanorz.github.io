@@ -8,8 +8,9 @@ tags:
     - Redis
 ---
 
-[原文全文连接](http://www.infoq.com/cn/articles/tq-redis-memory-usage-optimization-storage)
-[官方文档](https://redis.io/topics/memory-optimization)
+[redis-memory-usage-optimization-storage](http://www.infoq.com/cn/articles/tq-redis-memory-usage-optimization-storage)
+
+[官方文档 memory-optimization](https://redis.io/topics/memory-optimization)
 
 # 2011年的Redis文章总结
 
