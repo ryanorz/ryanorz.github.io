@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Hadoop HDFS C API 使用经验"
-date:       2017-3-1
+date:       2017-3-28
 author:     "Ryan"
 header-img: "img/post-bg-2017.jpg"
 tags:
